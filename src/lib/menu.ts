@@ -193,7 +193,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Arroz con queso",
     descripcion: "El acompañamiento boliviano por excelencia.",
     precioBase: 7,
-    imagen: "/porcion_de_arroz.png",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/porcion_de_arroz_sydiod.png",
     categoria: "Guarniciones",
     personalizacion: [],
   },
@@ -230,7 +230,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
   {
     id: "109",
     nombre: "Jugo del Valle",
-    descripcion: "Bebida Natural fria.",
+    descripcion: "Bebida Natural fria. Solo para consumo en Local",
     precioBase: 12,
     imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390397/jugo_grande_oapjjc.png",
     categoria: "Bebidas",
