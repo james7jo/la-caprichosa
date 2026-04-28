@@ -12,9 +12,27 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Producto | null>(null);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const modalAbierto = selectedProduct !== null || checkoutOpen;
+  {
+    /* Antes del return, agregá esta lógica: */
+  }
+  const estaAbierto = () => {
+    const ahora = new Date();
+    // Bolivia es UTC-4, sin cambio de horario
+    const horaBolivia = new Date(
+      ahora.toLocaleString("en-US", { timeZone: "America/La_Paz" }),
+    );
+    const hora = horaBolivia.getHours();
+    return hora >= 12 && hora < 22;
+  };
 
   return (
-    <main className="min-h-screen pb-36" style={{ background: "#0D0C0A" }}>
+    <main
+      className="min-h-screen"
+      style={{
+        background: "#0D0C0A",
+        paddingBottom: items.length > 0 ? "9rem" : "2rem",
+      }}
+    >
       {/* Línea de brasa */}
       <div
         className="w-full h-[3px]"
@@ -33,20 +51,37 @@ export default function Home() {
               "radial-gradient(ellipse 80% 220px at 20% 50%, rgba(232,66,10,0.08) 0%, transparent 70%)",
           }}
         />
-        <div
-          className="inline-flex items-center gap-2 mb-5 px-3 py-[5px] rounded-full text-[10px] font-bold tracking-[0.18em] uppercase"
-          style={{
-            background: "rgba(232,66,10,0.15)",
-            border: "1px solid rgba(232,66,10,0.4)",
-            color: "#FF7730",
-          }}
-        >
-          <span
-            className="w-[6px] h-[6px] rounded-full animate-pulse"
-            style={{ background: "#E8420A" }}
-          />
-          Abierto ahora
-        </div>
+        {estaAbierto() ? (
+          <div
+            className="inline-flex items-center gap-2 mb-5 px-3 py-[5px] rounded-full text-[10px] font-bold tracking-[0.18em] uppercase"
+            style={{
+              background: "rgba(232,66,10,0.15)",
+              border: "1px solid rgba(232,66,10,0.4)",
+              color: "#FF7730",
+            }}
+          >
+            <span
+              className="w-[6px] h-[6px] rounded-full animate-pulse"
+              style={{ background: "#E8420A" }}
+            />
+            Abierto ahora
+          </div>
+        ) : (
+          <div
+            className="inline-flex items-center gap-2 mb-5 px-3 py-[5px] rounded-full text-[10px] font-bold tracking-[0.18em] uppercase"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              color: "#6A6458",
+            }}
+          >
+            <span
+              className="w-[6px] h-[6px] rounded-full"
+              style={{ background: "#4A4840" }}
+            />
+            Cerrado ahora · Abre a las 12:00
+          </div>
+        )}
         <div className="mb-1">
           <span
             className="block text-[11px] font-bold tracking-[0.35em] uppercase mb-1"
@@ -207,6 +242,28 @@ export default function Home() {
           </button>
         </div>
       )}
+      {/* ── WHATSAPP FLOTANTE ── */}
+
+      <a
+        href="https://wa.me/59171761404"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed z-40 flex items-center justify-center transition-all active:scale-95"
+        style={{
+          bottom: items.length > 0 && !modalAbierto ? "7rem" : "1.5rem",
+          right: "1rem",
+          width: 48,
+          height: 48,
+          borderRadius: "50%",
+          background: "#25D366",
+          boxShadow: "0 4px 20px rgba(37,211,102,0.4)",
+        }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.522 5.855L.057 23.428a.75.75 0 00.921.921l5.573-1.465A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.726 9.726 0 01-4.953-1.354l-.355-.211-3.668.964.983-3.588-.231-.369A9.712 9.712 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z" />
+        </svg>
+      </a>
     </main>
   );
 }
