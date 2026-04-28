@@ -13,7 +13,7 @@ const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Churrasco",
     descripcion: "Corte clásico a la parrilla, tierno y jugoso.",
     precioBase: 35,
-    imagen: "/Churrasco.png",
+    imagen: "/Churrasco.jpg",
     categoria: "Carnes",
     personalizacion: [
       {
@@ -192,7 +192,7 @@ const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Arroz con queso",
     descripcion: "El acompañamiento boliviano por excelencia.",
     precioBase: 7,
-    imagen: "/mediocharke.jpg",
+    imagen: "/porcion_de_arroz.png",
     categoria: "Guarniciones",
     personalizacion: [],
   },
