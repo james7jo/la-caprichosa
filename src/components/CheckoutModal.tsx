@@ -144,6 +144,16 @@ export default function CheckoutModal({ onClose }: Props) {
                     >
                       {item.nombre}
                     </p>
+
+                    {/* Lógica inteligente: Si existe el campo guarnicionIncluida, se muestra */}
+                    {item.guarnicionIncluida && (
+                      <p
+                        className="text-[10px] uppercase tracking-wider font-bold"
+                        style={{ color: "#E8420A" }}
+                      >
+                        + {item.guarnicionIncluida}
+                      </p>
+                    )}
                     {item.opcionesSeleccionadas.length > 0 && (
                       <p
                         className="text-[11px] truncate"

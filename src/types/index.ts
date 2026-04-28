@@ -16,6 +16,7 @@ export interface Producto {
   precioBase: number;
   imagen: string;
   categoria: string;
+  guarnicionIncluida?: string;
   personalizacion: GrupoOpciones[]; // Aquí viven las papas, arroz, etc.
 }
 
