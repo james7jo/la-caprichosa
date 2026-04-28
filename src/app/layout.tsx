@@ -20,13 +20,51 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  // SEO Principal
   title: "La Caprichosa · Carnes a la Parrilla",
   description:
-    "El mejor sabor de la brasa en Cochabamba. Av. Circunvalación Este, Zona Pacata. Tel: 71761404",
+    "Disfruta el mejor sabor de la brasa en Cochabamba. Cortes premium, churrascos y asados. Ubicados en Av. Circunvalación Este, Zona Pacata. Pedidos al 71761404.",
+  keywords: [
+    "Churrasquería",
+    "Cochabamba",
+    "Parrillada",
+    "Carnes",
+    "Pacata",
+    "La Caprichosa",
+  ],
+  authors: [{ name: "La Caprichosa" }],
+
+  // Icono (Asegúrate de que icon.png esté en la carpeta /public)
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
+
+  // OpenGraph (Para WhatsApp y Facebook)
   openGraph: {
     title: "La Caprichosa · Carnes a la Parrilla",
-    description: "Pedidos por WhatsApp 🔥",
+    description:
+      "El sabor de la brasa directo a tu mesa en Cochabamba. ¡Haz tu pedido aquí! 🔥",
+    url: "https://la-caprichosa.vercel.app/",
     siteName: "La Caprichosa",
+    locale: "es_BO",
+    type: "website",
+    images: [
+      {
+        url: "/icon.png",
+        width: 800,
+        height: 600,
+        alt: "La Caprichosa Cochabamba",
+      },
+    ],
+  },
+
+  // Twitter (X)
+  twitter: {
+    card: "summary_large_image",
+    title: "La Caprichosa · Parrillada en Cochabamba",
+    description: "Cortes de carne premium y el mejor servicio de parrilla.",
+    images: ["/icon.png"],
   },
 };
 
@@ -40,6 +78,12 @@ export default function RootLayout({
       lang="es"
       className={`${bebasNeue.variable} ${dmSans.variable} ${playfair.variable} h-full antialiased`}
     >
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
+        />
+      </head>
       <body
         className="min-h-full flex flex-col"
         style={{
@@ -48,7 +92,7 @@ export default function RootLayout({
           fontFamily: "var(--font-dm-sans)",
         }}
       >
-        {children}
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );
