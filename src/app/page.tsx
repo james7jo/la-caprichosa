@@ -11,8 +11,6 @@ export default function Home() {
   const { total, items } = useCart();
   const [selectedProduct, setSelectedProduct] = useState<Producto | null>(null);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-
-  // Cualquier modal abierto → esconde el carrito flotante
   const modalAbierto = selectedProduct !== null || checkoutOpen;
 
   return (

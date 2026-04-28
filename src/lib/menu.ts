@@ -7,16 +7,16 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Corte clásico a la parrilla, tierno y jugoso.",
     precioBase: 35,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "/Churrasco.jpg",
+    imagen: "/churrasco.jpg",
     categoria: "Carnes",
     personalizacion: [
       {
         titulo: "Término de cocción",
         tipo: "radio",
         opciones: [
-          { nombre: "Término Medio", precioExtra: 0 },
-          { nombre: "Tres Cuartos", precioExtra: 0 },
-          { nombre: "Bien Cocido", precioExtra: 0 },
+          { nombre: "Término Medio (aprox. 15 min)", precioExtra: 0 },
+          { nombre: "Tres Cuartos (aprox. 20 min)", precioExtra: 0 },
+          { nombre: "Bien Cocido (aprox. 30 min)", precioExtra: 0 },
         ],
       },
       {
@@ -36,16 +36,16 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Corte con hueso, sabor intenso a la brasa.",
     precioBase: 35,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "/AsadoDeTira.jpg",
+    imagen: "/asado_tira.jpg",
     categoria: "Carnes",
     personalizacion: [
       {
         titulo: "Término de cocción",
         tipo: "radio",
         opciones: [
-          { nombre: "Término Medio", precioExtra: 0 },
-          { nombre: "Tres Cuartos", precioExtra: 0 },
-          { nombre: "Bien Cocido", precioExtra: 0 },
+          { nombre: "Término Medio (aprox. 15 min)", precioExtra: 0 },
+          { nombre: "Tres Cuartos (aprox. 20 min)", precioExtra: 0 },
+          { nombre: "Bien Cocido (aprox. 30 min)", precioExtra: 0 },
         ],
       },
       {
@@ -65,16 +65,16 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Conocido como Bife de Chorizo, sabor premium.",
     precioBase: 35,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "/bife_angosto.jpeg",
+    imagen: "/bife_chorizo.jpg",
     categoria: "Carnes",
     personalizacion: [
       {
         titulo: "Término de cocción",
         tipo: "radio",
         opciones: [
-          { nombre: "Término Medio", precioExtra: 0 },
-          { nombre: "Tres Cuartos", precioExtra: 0 },
-          { nombre: "Bien Cocido", precioExtra: 0 },
+          { nombre: "Término Medio (aprox. 15 min)", precioExtra: 0 },
+          { nombre: "Tres Cuartos (aprox. 20 min)", precioExtra: 0 },
+          { nombre: "Bien Cocido (aprox. 30 min)", precioExtra: 0 },
         ],
       },
       {
@@ -124,6 +124,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
         opciones: [
           { nombre: "Papa frita con queso", precioExtra: 7 },
           { nombre: "Arroz con queso", precioExtra: 7 },
+          { nombre: "Chorizo extra", precioExtra: 6 },
         ],
       },
     ],
@@ -143,6 +144,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
         opciones: [
           { nombre: "Papa frita con queso", precioExtra: 7 },
           { nombre: "Arroz con queso", precioExtra: 7 },
+          { nombre: "Chorizo extra", precioExtra: 6 },
         ],
       },
     ],
@@ -179,7 +181,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
   // ─── GUARNICIONES ───
   {
     id: "102",
-    nombre: "Papa frita con queso",
+    nombre: "Papa frita",
     descripcion: "Porción de papas con queso gratinado.",
     precioBase: 7,
     imagen: "/porcion_de_papa.jpg",
@@ -209,6 +211,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
         tipo: "checkbox",
         opciones: [
           { nombre: "Papa frita con queso", precioExtra: 7 },
+          { nombre: "Arroz con queso", precioExtra: 7 },
           { nombre: "Chorizo extra", precioExtra: 6 },
         ],
       },
@@ -233,34 +236,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     categoria: "Bebidas",
     personalizacion: [],
   },
-  // ─── POSTRES ───
-  {
-    id: "112",
-    nombre: "Tres leches",
-    descripcion: "Postre húmedo y dulce.",
-    precioBase: 20,
-    imagen: "/tres_leches.jpg",
-    categoria: "Postres",
-    personalizacion: [],
-  },
-  {
-    id: "113",
-    nombre: "Cheescake de maracuyá",
-    descripcion: "Toque ácido y cremoso.",
-    precioBase: 20,
-    imagen: "/maracuya.jpg",
-    categoria: "Postres",
-    personalizacion: [],
-  },
-  {
-    id: "114",
-    nombre: "Torta de chocolate",
-    descripcion: "Para los amantes del cacao.",
-    precioBase: 20,
-    imagen: "/torta_chocolate.jpg",
-    categoria: "Postres",
-    personalizacion: [],
-  },
+  
 ];
 
 export const SECCIONES = [
@@ -270,5 +246,4 @@ export const SECCIONES = [
   { cat: "Guarniciones", label: "Guarniciones", emoji: "🥗" },
   { cat: "Rápida", label: "Rápida", emoji: "🍔" },
   { cat: "Bebidas", label: "Bebidas", emoji: "🥤" },
-  { cat: "Postres", label: "Postres", emoji: "🍰" },
 ];
