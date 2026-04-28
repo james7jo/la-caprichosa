@@ -92,19 +92,21 @@ export default function MenuCard({ producto, onOpen }: Props) {
           <img
             src={imagen}
             alt={nombre}
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="110px"
+            // Agregamos w-full y h-full para que rellene los 110px y el alto del card
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
+
           {/* Overlay izquierdo para fusionar con el fondo */}
           <div
-            className="absolute inset-y-0 left-0 w-6 pointer-events-none"
+            className="absolute inset-y-0 left-0 w-6 pointer-events-none z-10"
             style={{
               background: "linear-gradient(to right, #171512, transparent)",
             }}
           />
+
           {/* Overlay oscuro base */}
           <div
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 pointer-events-none z-10"
             style={{ background: "rgba(0,0,0,0.15)" }}
           />
         </div>

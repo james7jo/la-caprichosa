@@ -107,61 +107,64 @@ export default function CustomizationModal({ producto, onClose }: Props) {
         </div>
 
         {/* IMAGEN */}
-        <div className="relative flex-shrink-0">
+        {/* 1. Agregamos rounded-t-[28px] para que coincida con el modal */}
+        <div className="relative flex-shrink-0 rounded-t-[28px] overflow-hidden">
           <div className="w-full h-44 relative bg-zinc-900">
             {producto.imagen && (
               <img
                 src={producto.imagen}
                 alt={producto.nombre}
-                className="object-cover"
-                style={{ opacity: 0.95 }}
+                className="w-full h-full object-cover"
+                style={{ opacity: 0.9 }}
               />
             )}
+
+            {/* Botón X */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onClose();
               }}
-              className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center z-50 transition-opacity hover:opacity-80"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center z-50 transition-all active:scale-90"
               style={{
-                background: "rgba(0,0,0,0.55)",
-                border: "1px solid rgba(255,255,255,0.12)",
+                background: "rgba(0,0,0,0.5)",
+                border: "1px solid rgba(255,255,255,0.15)",
                 color: "#fff",
               }}
             >
-              <X size={16} />
+              <X size={18} />
             </button>
-            {/* Gradiente más pronunciado para que el título flote bien */}
+
+            {/* Gradiente mejorado: más oscuro abajo para que el texto resalte más */}
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 z-10"
               style={{
                 background:
-                  "linear-gradient(to top, #141210 0%, rgba(20,18,16,0.6) 50%, transparent 100%)",
+                  "linear-gradient(to top, #171512 0%, rgba(23,21,18,0.4) 50%, transparent 100%)",
               }}
             />
           </div>
 
-          {/* Título flotando sobre la imagen */}
-          <div className="px-5 pb-3 -mt-14 relative z-10">
+          {/* Título flotando - Ajustamos el margen para que no esté tan pegado al borde */}
+          <div className="px-6 pb-4 -mt-16 relative z-20">
             <p
-              className="text-[10px] font-black tracking-[0.22em] uppercase mb-1"
+              className="text-[10px] font-black tracking-[0.25em] uppercase mb-1"
               style={{ color: "#E8570A" }}
             >
               Personalizar
             </p>
             <h2
-              className="text-[2rem] font-bold leading-none"
+              className="text-4xl font-bold leading-none"
               style={{
                 fontFamily: "var(--font-bebas)",
                 color: "#F5F0E8",
-                letterSpacing: "0.02em",
+                letterSpacing: "0.03em",
               }}
             >
               {producto.nombre}
             </h2>
           </div>
         </div>
-
         {/* CUERPO CON SCROLL INTERNO */}
         <div
           className="flex-1 overflow-y-auto px-5 pb-2 min-h-0"
