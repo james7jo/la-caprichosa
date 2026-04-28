@@ -36,10 +36,26 @@ export default function CheckoutModal({ onClose }: Props) {
     msg += `\n━━━━━━━━━━━━━━━━━━\n`;
 
     items.forEach((item) => {
+      // 1. Nombre del plato y precio
       msg += `🥩 *${item.nombre}* — ${item.totalPlato} Bs.\n`;
-      if (item.opcionesSeleccionadas.length > 0) {
-        msg += `   _${item.opcionesSeleccionadas.map((o) => o.nombre).join(", ")}_\n`;
+
+      // 2. Guarnición que ya incluye el plato (desde tu data.ts)
+      if (item.guarnicionIncluida) {
+        msg += `   _Viene con: ${item.guarnicionIncluida}_\n`;
+      } else {
+        msg += `   _Viene: Solo (sin guarnición)_\n`;
       }
+
+      // 3. Términos de cocción y Extras seleccionados
+      if (item.opcionesSeleccionadas.length > 0) {
+        // Separamos las opciones por coma
+        const extras = item.opcionesSeleccionadas
+          .map((o) => o.nombre)
+          .join(", ");
+        msg += `   _Detalle: ${extras}_\n`;
+      }
+
+      msg += `\n`; // Espacio entre productos
     });
 
     msg += `━━━━━━━━━━━━━━━━━━\n`;
@@ -260,7 +276,9 @@ export default function CheckoutModal({ onClose }: Props) {
                     color: tipoEntrega === tipo ? "#F0ECD8" : "#6A6458",
                   }}
                 >
-                  {tipo === "retiro" ? "🏠 Retiro en local" : "🛵 Delivery"}
+                  {tipo === "retiro"
+                    ? "🏠 Retiro en local"
+                    : "🍽️ Para Servirse"}
                 </button>
               ))}
             </div>
