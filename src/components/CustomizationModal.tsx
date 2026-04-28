@@ -2,7 +2,6 @@
 import { Producto, Opcion } from "@/types";
 import { useState, useEffect } from "react";
 import { useCart } from "@/store/useCart";
-import Image from "next/image";
 import { X, ShoppingBasket } from "lucide-react";
 
 interface Props {
@@ -111,11 +110,9 @@ export default function CustomizationModal({ producto, onClose }: Props) {
         <div className="relative flex-shrink-0">
           <div className="w-full h-44 relative bg-zinc-900">
             {producto.imagen && (
-              <Image
+              <img
                 src={producto.imagen}
                 alt={producto.nombre}
-                fill
-                sizes="100vw"
                 className="object-cover"
                 style={{ opacity: 0.95 }}
               />

@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { Producto } from "@/types";
 
 interface Props {
@@ -90,10 +89,9 @@ export default function MenuCard({ producto, onOpen }: Props) {
           className="relative flex-shrink-0 rounded-r-2xl overflow-hidden"
           style={{ width: "110px" }}
         >
-          <Image
+          <img
             src={imagen}
             alt={nombre}
-            fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="110px"
           />

@@ -7,7 +7,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Corte clásico a la parrilla, tierno y jugoso.",
     precioBase: 35,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "/churrasco.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390033/churrasco_yuu90k.jpg",
     categoria: "Carnes",
     personalizacion: [
       {
@@ -36,7 +36,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Corte con hueso, sabor intenso a la brasa.",
     precioBase: 35,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "/asado_tira.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777389538/asado_tira_zkdmiu.jpg",
     categoria: "Carnes",
     personalizacion: [
       {
@@ -65,7 +65,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Conocido como Bife de Chorizo, sabor premium.",
     precioBase: 35,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "/bife_chorizo.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777389821/bife_chorizo_qwpht7.jpg",
     categoria: "Carnes",
     personalizacion: [
       {
@@ -95,7 +95,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Combinación ideal para compartir.",
     precioBase: 60,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "/festin.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390084/festin_a9ds6a.jpg",
     categoria: "Especialidades",
     personalizacion: [
       {
@@ -115,7 +115,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Surtido de carnes y embutidos seleccionados.",
     precioBase: 90,
     guarnicionIncluida: "2 Arroz con queso y 2 papas",
-    imagen: "/parrillada_especial.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/parrillada_especial_jx3a6q.jpg",
     categoria: "Especialidades",
     personalizacion: [
       {
@@ -135,7 +135,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "La máxima experiencia parrillera para el grupo.",
     precioBase: 120,
     guarnicionIncluida: "3 Arroz con queso y 2 papas",
-    imagen: "/parrilada_completa.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/parrilada_completa_led3hz.jpg",
     categoria: "Especialidades",
     personalizacion: [
       {
@@ -154,7 +154,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Pique a la parrilla",
     descripcion: "Trozos de carne, chorizo y guarniciones.",
     precioBase: 40,
-    imagen: "/pique_parrila.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/pique_parrila_nlhavc.jpg",
     categoria: "Especialidades",
     personalizacion: [
       {
@@ -174,7 +174,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Chorizo",
     descripcion: "Unidad de chorizo parrillero.",
     precioBase: 6,
-    imagen: "/chorizo.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390084/chorizo_dl4gqv.jpg",
     categoria: "Extras",
     personalizacion: [],
   },
@@ -184,7 +184,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Papa frita",
     descripcion: "Porción de papas con queso gratinado.",
     precioBase: 7,
-    imagen: "/porcion_de_papa.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/porcion_de_papa_ffwtzp.jpg",
     categoria: "Guarniciones",
     personalizacion: [],
   },
@@ -203,7 +203,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Hamburguesa",
     descripcion: "Carne a la parrilla en pan suave.",
     precioBase: 18,
-    imagen: "/hamburguesa.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/hamburguesa_zqoq7i.jpg",
     categoria: "Rápida",
     personalizacion: [
       {
@@ -223,16 +223,16 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Gaseosa de 2L",
     descripcion: "Refresco familiar.",
     precioBase: 15,
-    imagen: "/gaseosa_2l.png",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390084/gaseosa_2l_u9vpap.jpg",
     categoria: "Bebidas",
     personalizacion: [],
   },
   {
     id: "109",
-    nombre: "Refresco de vaso",
-    descripcion: "Bebida individual fría.",
-    precioBase: 5,
-    imagen: "/refresco_vaso.jpg",
+    nombre: "Jugo del Valle",
+    descripcion: "Bebida Natural fria.",
+    precioBase: 12,
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390397/jugo_grande_oapjjc.png",
     categoria: "Bebidas",
     personalizacion: [],
   },
