@@ -79,7 +79,7 @@ export default function Home() {
               className="w-[6px] h-[6px] rounded-full"
               style={{ background: "#4A4840" }}
             />
-            Cerrado ahora · Abre a las 12:00
+            Cerrado ahora · Abre a las 12:30
           </div>
         )}
         <div className="mb-1">

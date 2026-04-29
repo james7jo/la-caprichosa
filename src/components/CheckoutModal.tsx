@@ -11,14 +11,31 @@ type TipoEntrega = "retiro" | "delivery";
 
 export default function CheckoutModal({ onClose }: Props) {
   const { items, total, removeItem, clearCart } = useCart();
+  // Reemplaza los useState de nombre por estos dos:
+  const [nombre, setNombre] = useState(
+    () => localStorage.getItem("cliente_nombre") || "",
+  );
+  const handleNombre = (v: string) => {
+    setNombre(v);
+    localStorage.setItem("cliente_nombre", v);
+  };
 
-  const [nombre, setNombre] = useState("");
+  const handleCelular = (v: string) => {
+    setCelular(v);
+    localStorage.setItem("cliente_celular", v);
+  };
+  const [celular, setCelular] = useState(
+    () => localStorage.getItem("cliente_celular") || "",
+  );
   const [tipoEntrega, setTipoEntrega] = useState<TipoEntrega>("retiro");
   const [direccion, setDireccion] = useState("");
   const [nota, setNota] = useState("");
+  // Agrega este estado junto a los demás
+  const [buscandoUbicacion, setBuscandoUbicacion] = useState(false);
 
   const puedeConfirmar =
     nombre.trim().length > 0 &&
+    celular.trim().length > 0 &&
     (tipoEntrega === "retiro" || direccion.trim().length > 0);
 
   const handleConfirmar = () => {
@@ -27,6 +44,7 @@ export default function CheckoutModal({ onClose }: Props) {
     const numero = "59171761404";
     let msg = `¡Hola! 🔥 Nuevo pedido en *La Caprichosa*\n\n`;
     msg += `👤 *Cliente:* ${nombre.trim()}\n`;
+    msg += `📱 *Celular:* ${celular.trim()}\n`;
     msg += `📦 *Entrega:* ${
       tipoEntrega === "retiro"
         ? "Retiro en local"
@@ -49,8 +67,13 @@ export default function CheckoutModal({ onClose }: Props) {
       // 3. Términos de cocción y Extras seleccionados
       if (item.opcionesSeleccionadas.length > 0) {
         // Separamos las opciones por coma
+        // DESPUÉS
         const extras = item.opcionesSeleccionadas
-          .map((o) => o.nombre)
+          .map((o) =>
+            o.cantidad && o.cantidad > 1
+              ? `${o.nombre} x${o.cantidad}`
+              : o.nombre,
+          )
           .join(", ");
         msg += `   _Detalle: ${extras}_\n`;
       }
@@ -226,29 +249,98 @@ export default function CheckoutModal({ onClose }: Props) {
             </div>
           </div>
 
-          {/* ── NOMBRE ── */}
-          <div>
-            <label
-              className="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2"
-              style={{ color: "#7A7060" }}
-            >
-              <User size={12} />
-              Tu nombre
-            </label>
-            <input
-              type="text"
-              placeholder="¿Cómo te llamas?"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              className="w-full px-4 py-3 rounded-2xl text-sm font-semibold outline-none transition-all"
-              style={{
-                background: "#1E1C18",
-                border: nombre
-                  ? "1px solid rgba(232,66,10,0.5)"
-                  : "1px solid #2C2A24",
-                color: "#F0ECD8",
-              }}
-            />
+          {/* ── NOMBRE Y CELULAR ── */}
+          <div className="flex flex-col gap-3">
+            <div>
+              <label
+                className="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2"
+                style={{ color: "#7A7060" }}
+              >
+                <User size={12} />
+                {tipoEntrega === "delivery"
+                  ? "Nombre de quien lo recibe"
+                  : "Nombre de quien lo recoja"}
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder={
+                    tipoEntrega === "delivery"
+                      ? "¿Cómo se llama quien lo recibe?"
+                      : "¿Cómo se llama quien lo recoja?"
+                  }
+                  value={nombre}
+                  onChange={(e) => handleNombre(e.target.value)}
+                  className="flex-1 px-4 py-3 rounded-2xl text-sm font-semibold outline-none transition-all"
+                  style={{
+                    background: "#1E1C18",
+                    border: nombre
+                      ? "1px solid rgba(232,66,10,0.5)"
+                      : "1px solid #2C2A24",
+                    color: "#F0ECD8",
+                  }}
+                />
+                {nombre.length > 0 && (
+                  <button
+                    onClick={() => handleNombre("")}
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all active:scale-90"
+                    style={{
+                      background: "#1E1C18",
+                      border: "1px solid #2C2A24",
+                      color: "#6A6458",
+                    }}
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label
+                className="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2"
+                style={{ color: "#7A7060" }}
+              >
+                📱 Celular de contacto
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="tel"
+                  placeholder="Ej: 76543210"
+                  value={celular}
+                  onChange={(e) => handleCelular(e.target.value)}
+                  className="flex-1 px-4 py-3 rounded-2xl text-sm font-semibold outline-none transition-all"
+                  style={{
+                    background: "#1E1C18",
+                    border: celular
+                      ? "1px solid rgba(232,66,10,0.5)"
+                      : "1px solid #2C2A24",
+                    color: "#F0ECD8",
+                  }}
+                />
+                {celular.length > 0 && (
+                  <button
+                    onClick={() => handleCelular("")}
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all active:scale-90"
+                    style={{
+                      background: "#1E1C18",
+                      border: "1px solid #2C2A24",
+                      color: "#6A6458",
+                    }}
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </div>
+              {celular.length > 0 && (
+                <p
+                  className="text-[10px] font-bold mt-1.5"
+                  style={{ color: "#7A7060" }}
+                >
+                  💾 Guardado para tu próxima compra
+                </p>
+              )}
+            </div>
           </div>
 
           {/* ── TIPO DE ENTREGA ── */}
@@ -276,9 +368,7 @@ export default function CheckoutModal({ onClose }: Props) {
                     color: tipoEntrega === tipo ? "#F0ECD8" : "#6A6458",
                   }}
                 >
-                  {tipo === "retiro"
-                    ? "🏠 Retiro en local"
-                    : "🍽️ Para Servirse"}
+                  {tipo === "retiro" ? "🏠 Retiro en local" : "🛵 Delivery"}
                 </button>
               ))}
             </div>
@@ -294,20 +384,84 @@ export default function CheckoutModal({ onClose }: Props) {
                 <MapPin size={12} />
                 Dirección de entrega
               </label>
-              <input
-                type="text"
-                placeholder="Ej: Av. Blanco Galindo #450, Quillacollo"
-                value={direccion}
-                onChange={(e) => setDireccion(e.target.value)}
-                className="w-full px-4 py-3 rounded-2xl text-sm font-semibold outline-none transition-all"
-                style={{
-                  background: "#1E1C18",
-                  border: direccion
-                    ? "1px solid rgba(232,66,10,0.5)"
-                    : "1px solid #2C2A24",
-                  color: "#F0ECD8",
-                }}
-              />
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Ej: Av. Blanco Galindo #450"
+                  value={direccion}
+                  onChange={(e) => setDireccion(e.target.value)}
+                  className="flex-1 px-4 py-3 rounded-2xl text-sm font-semibold outline-none transition-all"
+                  style={{
+                    background: "#1E1C18",
+                    border: direccion
+                      ? "1px solid rgba(232,66,10,0.5)"
+                      : "1px solid #2C2A24",
+                    color: "#F0ECD8",
+                  }}
+                />
+                {/* Botón ubicación GPS */}
+                <button
+                  onClick={() => {
+                    if (!navigator.geolocation || buscandoUbicacion) return;
+                    setBuscandoUbicacion(true);
+                    navigator.geolocation.getCurrentPosition(
+                      (pos) => {
+                        const { latitude, longitude } = pos.coords;
+                        setDireccion(
+                          `https://maps.google.com/?q=${latitude},${longitude}`,
+                        );
+                        setBuscandoUbicacion(false);
+                      },
+                      () => {
+                        setBuscandoUbicacion(false);
+                      },
+                    );
+                  }}
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all active:scale-90"
+                  style={{
+                    background: direccion.startsWith("https://maps")
+                      ? "rgba(232,66,10,0.2)"
+                      : "#1E1C18",
+                    border: direccion.startsWith("https://maps")
+                      ? "1px solid rgba(232,66,10,0.5)"
+                      : "1px solid #2C2A24",
+                    color: direccion.startsWith("https://maps")
+                      ? "#E8420A"
+                      : "#6A6458",
+                  }}
+                  title="Usar mi ubicación actual"
+                >
+                  {buscandoUbicacion ? (
+                    // Spinner animado
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      style={{
+                        animation: "spin 0.8s linear infinite",
+                        color: "#E8420A",
+                      }}
+                    >
+                      <path d="M12 2a10 10 0 0 1 10 10" />
+                      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+                    </svg>
+                  ) : (
+                    <MapPin size={18} />
+                  )}
+                </button>
+              </div>
+              {direccion.startsWith("https://maps") && (
+                <p
+                  className="text-[10px] font-bold mt-1.5 flex items-center gap-1"
+                  style={{ color: "#E8420A" }}
+                >
+                  📍 Ubicación GPS capturada
+                </p>
+              )}
             </div>
           )}
 

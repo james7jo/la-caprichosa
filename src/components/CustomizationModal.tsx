@@ -1,6 +1,6 @@
 "use client";
 import { Producto, Opcion } from "@/types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCart } from "@/store/useCart";
 import { X, ShoppingBasket } from "lucide-react";
 
@@ -13,24 +13,35 @@ export default function CustomizationModal({ producto, onClose }: Props) {
   const addItem = useCart((state) => state.addItem);
   const [seleccionadas, setSeleccionadas] = useState<Opcion[]>([]);
 
-  const extraTotal = seleccionadas.reduce((acc, op) => acc + op.precioExtra, 0);
-  const totalPlato = producto.precioBase + extraTotal;
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    history.pushState(null, "");
-    const handlePop = () => onClose();
+    history.pushState(null, "", location.href);
+
+    const handlePop = () => onCloseRef.current();
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onCloseRef.current();
     };
+
     window.addEventListener("popstate", handlePop);
     window.addEventListener("keydown", handleEsc);
+
     return () => {
       document.body.style.overflow = "unset";
       window.removeEventListener("popstate", handlePop);
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [onClose]);
+  }, []);
+
+  const extraTotal = seleccionadas.reduce(
+    (acc, op) => acc + op.precioExtra * (op.cantidad ?? 1),
+    0,
+  );
+  const totalPlato = producto.precioBase + extraTotal;
 
   const handleToggleOpcion = (
     opcion: Opcion,
@@ -51,9 +62,22 @@ export default function CustomizationModal({ producto, onClose }: Props) {
       setSeleccionadas((prev) =>
         existe
           ? prev.filter((o) => o.nombre !== opcion.nombre)
-          : [...prev, opcion],
+          : [...prev, { ...opcion, cantidad: 1 }],
       );
     }
+  };
+
+  const handleCantidad = (opcion: Opcion, delta: number) => {
+    setSeleccionadas((prev) => {
+      const existe = prev.find((o) => o.nombre === opcion.nombre);
+      if (!existe) return prev;
+      const nuevaCantidad = (existe.cantidad ?? 1) + delta;
+      if (nuevaCantidad <= 0)
+        return prev.filter((o) => o.nombre !== opcion.nombre);
+      return prev.map((o) =>
+        o.nombre === opcion.nombre ? { ...o, cantidad: nuevaCantidad } : o,
+      );
+    });
   };
 
   const handleAgregar = () => {
@@ -71,7 +95,6 @@ export default function CustomizationModal({ producto, onClose }: Props) {
       onClick={onClose}
       className="fixed inset-0 z-[100] flex items-end justify-center overflow-hidden"
       style={{
-        // Fondo: negro + mancha naranja difusa centrada abajo
         background: `
           radial-gradient(ellipse 70% 40% at 50% 100%, rgba(234,88,12,0.25) 0%, transparent 70%),
           rgba(0,0,0,0.88)
@@ -85,16 +108,14 @@ export default function CustomizationModal({ producto, onClose }: Props) {
         style={{
           background: "linear-gradient(180deg, #1C1915 0%, #141210 100%)",
           borderRadius: "24px 24px 0 0",
-          // Solo ocupa lo que necesita, sin espacio muerto
           maxHeight: "92dvh",
           border: "1px solid rgba(255,255,255,0.07)",
           borderBottom: "none",
-          // Brillo sutil en el borde superior
           boxShadow:
             "0 -1px 0 rgba(234,88,12,0.3), 0 -40px 80px rgba(234,88,12,0.1)",
         }}
       >
-        {/* Handle pill — toque nativo mobile */}
+        {/* Handle pill */}
         <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
           <div
             style={{
@@ -107,7 +128,6 @@ export default function CustomizationModal({ producto, onClose }: Props) {
         </div>
 
         {/* IMAGEN */}
-        {/* 1. Agregamos rounded-t-[28px] para que coincida con el modal */}
         <div className="relative flex-shrink-0 rounded-t-[28px] overflow-hidden">
           <div className="w-full h-44 relative bg-zinc-900">
             {producto.imagen && (
@@ -119,7 +139,6 @@ export default function CustomizationModal({ producto, onClose }: Props) {
               />
             )}
 
-            {/* Botón X */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -135,7 +154,6 @@ export default function CustomizationModal({ producto, onClose }: Props) {
               <X size={18} />
             </button>
 
-            {/* Gradiente mejorado: más oscuro abajo para que el texto resalte más */}
             <div
               className="absolute inset-0 z-10"
               style={{
@@ -145,7 +163,6 @@ export default function CustomizationModal({ producto, onClose }: Props) {
             />
           </div>
 
-          {/* Título flotando - Ajustamos el margen para que no esté tan pegado al borde */}
           <div className="px-6 pb-4 -mt-16 relative z-20">
             <p
               className="text-[10px] font-black tracking-[0.25em] uppercase mb-1"
@@ -165,6 +182,7 @@ export default function CustomizationModal({ producto, onClose }: Props) {
             </h2>
           </div>
         </div>
+
         {/* CUERPO CON SCROLL INTERNO */}
         <div
           className="flex-1 overflow-y-auto px-5 pb-2 min-h-0"
@@ -212,13 +230,16 @@ export default function CustomizationModal({ producto, onClose }: Props) {
               </div>
               <div className="flex flex-col gap-2">
                 {grupo.opciones.map((op) => {
-                  const activa = seleccionadas.some(
+                  const seleccionada = seleccionadas.find(
                     (o) => o.nombre === op.nombre,
                   );
+                  const activa = !!seleccionada;
+                  const cantidad = seleccionada?.cantidad ?? 1;
+
                   return (
-                    <label
+                    <div
                       key={op.nombre}
-                      className="flex justify-between items-center px-4 py-3 rounded-2xl cursor-pointer transition-all"
+                      className="flex justify-between items-center px-4 py-3 rounded-2xl transition-all"
                       style={{
                         background: activa
                           ? "rgba(232,87,10,0.12)"
@@ -226,8 +247,13 @@ export default function CustomizationModal({ producto, onClose }: Props) {
                         border: `1px solid ${activa ? "rgba(232,87,10,0.5)" : "rgba(255,255,255,0.06)"}`,
                       }}
                     >
-                      <div className="flex items-center gap-3">
-                        {/* Indicador radio/check personalizado */}
+                      {/* Lado izquierdo: indicador + nombre — clickeable para toggle */}
+                      <div
+                        className="flex items-center gap-3 flex-1 cursor-pointer"
+                        onClick={() =>
+                          handleToggleOpcion(op, grupo.tipo, grupo.titulo)
+                        }
+                      >
                         <div
                           className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
                           style={{
@@ -247,23 +273,68 @@ export default function CustomizationModal({ producto, onClose }: Props) {
                         >
                           {op.nombre}
                         </span>
-                        <input
-                          type={grupo.tipo === "radio" ? "radio" : "checkbox"}
-                          className="hidden"
-                          onChange={() =>
-                            handleToggleOpcion(op, grupo.tipo, grupo.titulo)
-                          }
-                        />
                       </div>
-                      {op.precioExtra > 0 && (
-                        <span
-                          className="font-black text-sm tabular-nums"
-                          style={{ color: "#E8570A" }}
-                        >
-                          +{op.precioExtra} Bs.
-                        </span>
+
+                      {/* Lado derecho */}
+                      {activa && grupo.tipo === "checkbox" ? (
+                        // Botones +/- cuando está seleccionado en checkbox
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleCantidad(op, -1);
+                            }}
+                            className="w-7 h-7 rounded-full flex items-center justify-center transition-all active:scale-90"
+                            style={{
+                              background: "rgba(255,255,255,0.08)",
+                              border: "1px solid rgba(255,255,255,0.12)",
+                              color: "#F5F0E8",
+                              fontSize: 16,
+                            }}
+                          >
+                            −
+                          </button>
+                          <span
+                            className="font-black text-base tabular-nums w-5 text-center"
+                            style={{ color: "#F5F0E8" }}
+                          >
+                            {cantidad}
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleCantidad(op, +1);
+                            }}
+                            className="w-7 h-7 rounded-full flex items-center justify-center transition-all active:scale-90"
+                            style={{
+                              background: "#E8570A",
+                              color: "#fff",
+                              fontSize: 16,
+                            }}
+                          >
+                            +
+                          </button>
+                          {op.precioExtra > 0 && (
+                            <span
+                              className="font-black text-sm tabular-nums ml-1"
+                              style={{ color: "#E8570A" }}
+                            >
+                              +{op.precioExtra * cantidad} Bs.
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        // Precio normal para radio o checkbox no seleccionado
+                        op.precioExtra > 0 && (
+                          <span
+                            className="font-black text-sm tabular-nums"
+                            style={{ color: "#E8570A" }}
+                          >
+                            +{op.precioExtra} Bs.
+                          </span>
+                        )
                       )}
-                    </label>
+                    </div>
                   );
                 })}
               </div>
@@ -271,7 +342,7 @@ export default function CustomizationModal({ producto, onClose }: Props) {
           ))}
         </div>
 
-        {/* BOTÓN AGREGAR — siempre visible */}
+        {/* BOTÓN AGREGAR */}
         <div
           className="flex-shrink-0 flex items-center gap-3 px-5 pt-3 pb-6"
           style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}

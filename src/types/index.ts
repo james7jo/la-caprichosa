@@ -1,7 +1,9 @@
 export interface Opcion {
   nombre: string;
   precioExtra: number;
+  cantidad?: number;
 }
+
 
 export interface GrupoOpciones {
   titulo: string;
