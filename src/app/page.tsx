@@ -116,19 +116,29 @@ export default function Home() {
           Carnes a la Parrilla · Cochabamba
         </p>
         <div className="flex flex-wrap gap-2 mt-4">
-          {["📍 Av. Circunvalación Este, Pacata", "📞 71761404"].map((txt) => (
-            <span
-              key={txt}
-              className="text-[11px] px-3 py-[5px] rounded-full"
-              style={{
-                background: "#181610",
-                color: "#7A7060",
-                border: "1px solid #252320",
-              }}
-            >
-              {txt}
-            </span>
-          ))}
+          <a
+            href="https://maps.google.com/?q=-17.373072,-66.117371"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] px-3 py-[5px] rounded-full transition-all active:scale-95"
+            style={{
+              background: "#181610",
+              color: "#7A7060",
+              border: "1px solid #252320",
+            }}
+          >
+            📍 Av. Circunvalación Este, Pacata
+          </a>
+          <span
+            className="text-[11px] px-3 py-[5px] rounded-full flex items-center gap-1"
+            style={{
+              background: "#181610",
+              color: "#7A7060",
+              border: "1px solid #252320",
+            }}
+          >
+            📞 71761404
+          </span>
         </div>
       </div>
 
