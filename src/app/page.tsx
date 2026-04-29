@@ -22,7 +22,7 @@ export default function Home() {
       ahora.toLocaleString("en-US", { timeZone: "America/La_Paz" }),
     );
     const hora = horaBolivia.getHours();
-    return hora >= 12 && hora < 22;
+    return hora >= 13 && hora < 22;
   };
 
   return (
@@ -79,7 +79,7 @@ export default function Home() {
               className="w-[6px] h-[6px] rounded-full"
               style={{ background: "#4A4840" }}
             />
-            Cerrado ahora · Abre a las 12:30
+            Cerrado ahora · Abre a las 13:00
           </div>
         )}
         <div className="mb-1">

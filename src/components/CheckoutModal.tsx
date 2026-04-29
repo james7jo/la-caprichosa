@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useCart } from "@/store/useCart";
 import { X, MapPin, Package, User, Trash2, ShoppingBasket } from "lucide-react";
 
@@ -11,6 +11,30 @@ type TipoEntrega = "retiro" | "delivery";
 
 export default function CheckoutModal({ onClose }: Props) {
   const { items, total, removeItem, clearCart } = useCart();
+  // 2. Agrega el ref justo después de los useState
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    history.pushState(null, "", location.href);
+
+    const handlePop = () => onCloseRef.current();
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCloseRef.current();
+    };
+
+    window.addEventListener("popstate", handlePop);
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("popstate", handlePop);
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
   // Reemplaza los useState de nombre por estos dos:
   const [nombre, setNombre] = useState(
     () => localStorage.getItem("cliente_nombre") || "",
@@ -96,10 +120,12 @@ export default function CheckoutModal({ onClose }: Props) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-end justify-center"
+      onClick={onClose}
       style={{ background: "rgba(0,0,0,0.8)", backdropFilter: "blur(8px)" }}
     >
       <div
         className="w-full max-w-md overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
         style={{
           background: "#171512",
           borderRadius: "28px 28px 0 0",
