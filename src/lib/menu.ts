@@ -123,15 +123,6 @@ export const PLATOS_EJEMPLO: Producto[] = [
     categoria: "Carnes de cerdo",
     personalizacion: [
       {
-        titulo: "Término de cocción",
-        tipo: "radio",
-        opciones: [
-          { nombre: "Término Medio (aprox. 15 min)", precioExtra: 0 },
-          { nombre: "Tres Cuartos (aprox. 20 min)", precioExtra: 0 },
-          { nombre: "Bien Cocido (aprox. 30 min)", precioExtra: 0 },
-        ],
-      },
-      {
         titulo: "Agregar guarnición",
         tipo: "checkbox",
         opciones: [
@@ -152,15 +143,6 @@ export const PLATOS_EJEMPLO: Producto[] = [
     categoria: "Carnes de cerdo",
     personalizacion: [
       {
-        titulo: "Término de cocción",
-        tipo: "radio",
-        opciones: [
-          { nombre: "Término Medio (aprox. 15 min)", precioExtra: 0 },
-          { nombre: "Tres Cuartos (aprox. 20 min)", precioExtra: 0 },
-          { nombre: "Bien Cocido (aprox. 30 min)", precioExtra: 0 },
-        ],
-      },
-      {
         titulo: "Agregar guarnición",
         tipo: "checkbox",
         opciones: [
@@ -180,15 +162,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777389821/bife_chorizo_qwpht7.jpg",
     categoria: "Carnes de cerdo",
     personalizacion: [
-      {
-        titulo: "Término de cocción",
-        tipo: "radio",
-        opciones: [
-          { nombre: "Término Medio (aprox. 15 min)", precioExtra: 0 },
-          { nombre: "Tres Cuartos (aprox. 20 min)", precioExtra: 0 },
-          { nombre: "Bien Cocido (aprox. 30 min)", precioExtra: 0 },
-        ],
-      },
+
       {
         titulo: "Agregar guarnición",
         tipo: "checkbox",
