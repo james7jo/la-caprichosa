@@ -9,7 +9,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Corte clásico a la parrilla, tierno y jugoso.",
     precioBase: 38,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390033/churrasco_yuu90k.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520303/churrasco_mysazx.jpg",
     categoria: "Carnes de res",
     personalizacion: [
       {
@@ -38,7 +38,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Corte con hueso, sabor intenso a la brasa.",
     precioBase: 70,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777389538/asado_tira_zkdmiu.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520303/asado_de_tira_wfoere.jpg",
     categoria: "Carnes de res",
     personalizacion: [
       {
@@ -68,7 +68,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Conocido como Bife de Chorizo, sabor premium.",
     precioBase: 70,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777389821/bife_chorizo_qwpht7.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520597/bifechorizo_vi70av.png",
     categoria: "Carnes de res",
     personalizacion: [
       {
@@ -96,7 +96,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Pique a la parrilla",
     descripcion: "Trozos de carne, chorizo y guarniciones. Personal.",
     precioBase: 45,
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/pique_parrila_nlhavc.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520305/piquemacho_ix8sl1.jpg",
     categoria: "Carnes de res",
     personalizacion: [
       {
@@ -119,7 +119,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Chuleta de cerdo a la parrilla, jugosa y sabrosa.",
     precioBase: 30,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390033/churrasco_yuu90k.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520303/chuletadecerdo_z2p4om.jpg",
     categoria: "Carnes de cerdo",
     personalizacion: [
       {
@@ -139,7 +139,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Corte fino de cerdo a la parrilla.",
     precioBase: 65,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777389538/asado_tira_zkdmiu.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520891/matambredecerdo_k3srfs.png",
     categoria: "Carnes de cerdo",
     personalizacion: [
       {
@@ -159,7 +159,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Imponente corte de cerdo con hueso largo. Incluye una porción de chorizo.",
     precioBase: 65,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777389821/bife_chorizo_qwpht7.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777521058/tomahawkdecerdo_ukhprc.png",
     categoria: "Carnes de cerdo",
     personalizacion: [
 
@@ -183,7 +183,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Incluye cuadrili, filete de pollo, dos tipos de chorizos, papas fritas y arroz con queso.",
     precioBase: 65,
     guarnicionIncluida: "Arroz con queso y papas",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390084/festin_a9ds6a.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520303/festin_vnakpe.jpg",
     categoria: "Tablitas mixtas",
     personalizacion: [
       {
@@ -203,7 +203,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Incluye asado de tira, dos tipos de chorizo, filete de pollo, chuleta de cerdo, dos porciones de papa frita y arroz con queso.",
     precioBase: 130,
     guarnicionIncluida: "2 porciones de papa y 1 arroz con queso",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/parrillada_especial_jx3a6q.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520304/parrilladaespecial_f5unzb.jpg",
     categoria: "Tablitas mixtas",
     personalizacion: [
       {
@@ -223,7 +223,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     descripcion: "Incluye asado de tira, churrasco, filete de pollo, dos tipos de chorizo, chuleta de cerdo, tres porciones de papas fritas y 2 porciones de arroz con queso.",
     precioBase: 180,
     guarnicionIncluida: "3 porciones de papa y 2 de arroz",
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/parrilada_completa_led3hz.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520303/parriladacompleta_eatsjx.jpg",
     categoria: "Tablitas mixtas",
     personalizacion: [
       {
@@ -253,7 +253,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Chorizo criollo",
     descripcion: "Chorizo parrillero criollo.",
     precioBase: 10,
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390084/chorizo_dl4gqv.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777521353/chorizocriollo_jz4kte.png",
     categoria: "Para picar y extras",
     personalizacion: [],
   },
@@ -262,7 +262,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Porción de papa frita",
     descripcion: "Porción de papas con queso gratinado.",
     precioBase: 15,
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/porcion_de_papa_ffwtzp.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520304/porcion_de_papas_pz0lrq.jpg",
     categoria: "Para picar y extras",
     personalizacion: [],
   },
@@ -271,7 +271,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Porción de arroz con queso",
     descripcion: "El acompañamiento boliviano por excelencia.",
     precioBase: 8,
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/porcion_de_arroz_sydiod.png",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520304/porcion_de_arroz_nz491i.jpg",
     categoria: "Para picar y extras",
     personalizacion: [],
   },
@@ -280,30 +280,9 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Pan tostado",
     descripcion: "Pan tostado a la parrilla.",
     precioBase: 8,
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/porcion_de_papa_ffwtzp.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777521603/pantostado_agdtnr.png",
     categoria: "Para picar y extras",
     personalizacion: [],
-  },
-
-  // ─── RÁPIDA ───
-  {
-    id: "104",
-    nombre: "Hamburguesa",
-    descripcion: "Carne a la parrilla en pan suave.",
-    precioBase: 18,
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390085/hamburguesa_zqoq7i.jpg",
-    categoria: "Rápida",
-    personalizacion: [
-      {
-        titulo: "Agregar",
-        tipo: "checkbox",
-        opciones: [
-          { nombre: "Papa frita con queso", precioExtra: 7 },
-          { nombre: "Arroz con queso", precioExtra: 7 },
-          { nombre: "Chorizo extra", precioExtra: 6 },
-        ],
-      },
-    ],
   },
 
   // ─── BEBIDAS ───
@@ -312,7 +291,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
     nombre: "Gaseosa de 2L",
     descripcion: "Refresco familiar.",
     precioBase: 15,
-    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777390084/gaseosa_2l_u9vpap.jpg",
+    imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777521738/sodas_pcboqi.png",
     categoria: "Bebidas",
     personalizacion: [],
   },
