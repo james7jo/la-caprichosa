@@ -4,18 +4,26 @@ import { Producto } from "@/types";
 interface Props {
   producto: Producto;
   onOpen: (p: Producto) => void;
+  disabled?: boolean;
 }
 
-export default function MenuCard({ producto, onOpen }: Props) {
+export default function MenuCard({
+  producto,
+  onOpen,
+  disabled = false,
+}: Props) {
   const { nombre, descripcion, precioBase, imagen } = producto;
 
   return (
     <button
-      onClick={() => onOpen(producto)}
+      onClick={() => !disabled && onOpen(producto)}
+      disabled={disabled}
       className="w-full text-left group relative overflow-hidden rounded-2xl transition-all duration-200 active:scale-[0.98]"
       style={{
         background: "#171512",
         border: "1px solid #252320",
+        opacity: disabled ? 0.45 : 1,
+        cursor: disabled ? "not-allowed" : "pointer",
       }}
     >
       {/* Hover glow */}

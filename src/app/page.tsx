@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MenuCard from "@/components/MenuCard";
 import CustomizationModal from "@/components/CustomizationModal";
 import CheckoutModal from "@/components/CheckoutModal";
@@ -15,15 +15,14 @@ export default function Home() {
   {
     /* Antes del return, agregá esta lógica: */
   }
-  const estaAbierto = () => {
-    const ahora = new Date();
-    // Bolivia es UTC-4, sin cambio de horario
-    const horaBolivia = new Date(
-      ahora.toLocaleString("en-US", { timeZone: "America/La_Paz" }),
-    );
-    const hora = horaBolivia.getHours();
-    return hora >= 13 && hora < 22;
-  };
+  // Reemplaza la función estaAbierto por esto junto a los otros useState:
+  const [abierto, setAbierto] = useState<boolean>(false);
+  useEffect(() => {
+    const hora = new Date(
+      new Date().toLocaleString("en-US", { timeZone: "America/La_Paz" }),
+    ).getHours();
+    setAbierto(hora >= 13 && hora < 22);
+  }, []);
 
   return (
     <main
@@ -51,7 +50,7 @@ export default function Home() {
               "radial-gradient(ellipse 80% 220px at 20% 50%, rgba(232,66,10,0.08) 0%, transparent 70%)",
           }}
         />
-        {estaAbierto() ? (
+        {abierto ? (
           <div
             className="inline-flex items-center gap-2 mb-5 px-3 py-[5px] rounded-full text-[10px] font-bold tracking-[0.18em] uppercase"
             style={{
@@ -181,7 +180,8 @@ export default function Home() {
                   <MenuCard
                     key={p.id}
                     producto={p}
-                    onOpen={setSelectedProduct}
+                    onOpen={abierto ? setSelectedProduct : () => {}}
+                    disabled={!abierto}
                   />
                 ))}
               </div>

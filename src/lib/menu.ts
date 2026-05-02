@@ -220,7 +220,7 @@ export const PLATOS_EJEMPLO: Producto[] = [
   {
     id: "99",
     nombre: "Parrillada completa",
-    descripcion: "Incluye asado de tira, churrasco, filete de pollo, dos tipos de chorizo, chuleta de cerdo, tres porciones de papas fritas y 2 porciones de arroz con queso.",
+    descripcion: "Incluye asado de tira, churrasco, filete de pollo, matambre de cerdo, dos tipos de chorizo, chuleta de cerdo, tres porciones de papas fritas y 2 porciones de arroz con queso.",
     precioBase: 180,
     guarnicionIncluida: "3 porciones de papa y 2 de arroz",
     imagen: "https://res.cloudinary.com/dh1xm1ov8/image/upload/v1777520303/parriladacompleta_eatsjx.jpg",
