@@ -25,9 +25,10 @@ export const PLATOS_EJEMPLO: Producto[] = [
         titulo: "Agregar guarnición",
         tipo: "checkbox",
         opciones: [
-          { nombre: "Papa frita con queso", precioExtra: 7 },
-          { nombre: "Arroz con queso", precioExtra: 7 },
-          { nombre: "Chorizo extra", precioExtra: 6 },
+          { nombre: "Papa frita", precioExtra: 15 },
+          { nombre: "Arroz con queso", precioExtra: 8 },
+          { nombre: "Chorizo extra", precioExtra: 10 },
+          { nombre: "Pan tostado", precioExtra: 8 },
         ],
       },
     ],

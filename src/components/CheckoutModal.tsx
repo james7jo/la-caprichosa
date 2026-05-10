@@ -7,12 +7,18 @@ interface Props {
   onClose: () => void;
 }
 
-type TipoEntrega = "retiro" | "delivery";
+type TipoEntrega = "retiro" | "delivery" | "local";
 
 export default function CheckoutModal({ onClose }: Props) {
   const { items, total, removeItem, clearCart } = useCart();
   // 2. Agrega el ref justo después de los useState
   const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    if (items.length === 0) {
+      onClose();
+    }
+  }, [items.length, onClose]);
+
   useEffect(() => {
     onCloseRef.current = onClose;
   }, [onClose]);
@@ -51,7 +57,7 @@ export default function CheckoutModal({ onClose }: Props) {
   const [celular, setCelular] = useState(
     () => localStorage.getItem("cliente_celular") || "",
   );
-  const [tipoEntrega, setTipoEntrega] = useState<TipoEntrega>("retiro");
+  const [tipoEntrega, setTipoEntrega] = useState<TipoEntrega>("local");
   const [direccion, setDireccion] = useState("");
   const [nota, setNota] = useState("");
   // Agrega este estado junto a los demás
@@ -60,7 +66,7 @@ export default function CheckoutModal({ onClose }: Props) {
   const puedeConfirmar =
     nombre.trim().length > 0 &&
     celular.trim().length > 0 &&
-    (tipoEntrega === "retiro" || direccion.trim().length > 0);
+    (tipoEntrega !== "delivery" || direccion.trim().length > 0);
 
   const handleConfirmar = () => {
     if (!puedeConfirmar) return;
@@ -69,11 +75,16 @@ export default function CheckoutModal({ onClose }: Props) {
     let msg = `¡Hola! 🔥 Nuevo pedido en *La Caprichosa*\n\n`;
     msg += `👤 *Cliente:* ${nombre.trim()}\n`;
     msg += `📱 *Celular:* ${celular.trim()}\n`;
-    msg += `📦 *Entrega:* ${
-      tipoEntrega === "retiro"
-        ? "Retiro en local"
-        : `Delivery — ${direccion.trim()}`
-    }\n`;
+
+    // SOLUCIÓN: Usamos el objeto para mapear el texto correcto
+    const entregaTexto = {
+      retiro: "🏠 Retiro en local (Para llevar)",
+      delivery: `🛵 Delivery — ${direccion.trim()}`,
+      local: "🍽️ Comer en el local",
+    }[tipoEntrega];
+
+    msg += `📦 *Entrega:* ${entregaTexto}\n`; // Usamos la variable anterior
+
     if (nota.trim()) msg += `📝 *Nota:* ${nota.trim()}\n`;
     msg += `\n━━━━━━━━━━━━━━━━━━\n`;
 
@@ -369,7 +380,7 @@ export default function CheckoutModal({ onClose }: Props) {
             </div>
           </div>
 
-          {/* ── TIPO DE ENTREGA ── */}
+          {/* ── TIPO DE ENTREGA EN UNA SOLA FILA ── */}
           <div>
             <label
               className="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase mb-2"
@@ -378,25 +389,40 @@ export default function CheckoutModal({ onClose }: Props) {
               <Package size={12} />
               ¿Cómo lo quieres?
             </label>
-            <div className="grid grid-cols-2 gap-2">
-              {(["retiro", "delivery"] as TipoEntrega[]).map((tipo) => (
-                <button
-                  key={tipo}
-                  onClick={() => setTipoEntrega(tipo)}
-                  className="py-3 px-4 rounded-2xl font-bold text-sm transition-all active:scale-95"
-                  style={{
-                    background:
-                      tipoEntrega === tipo ? "rgba(232,66,10,0.15)" : "#1E1C18",
-                    border:
-                      tipoEntrega === tipo
-                        ? "1px solid rgba(232,66,10,0.5)"
-                        : "1px solid #2C2A24",
-                    color: tipoEntrega === tipo ? "#F0ECD8" : "#6A6458",
-                  }}
-                >
-                  {tipo === "retiro" ? "🏠 Retiro en local" : "🛵 Delivery"}
-                </button>
-              ))}
+
+            {/* Cambiamos a grid-cols-3 siempre y ajustamos el padding (px-1) */}
+            <div className="grid grid-cols-3 gap-1.5">
+              {(["local", "retiro", "delivery"] as TipoEntrega[]).map(
+                (tipo) => (
+                  <button
+                    key={tipo}
+                    onClick={() => setTipoEntrega(tipo)}
+                    className="py-3 px-1 rounded-xl font-bold text-[10px] xs:text-[12px] transition-all active:scale-95 flex flex-col items-center justify-center gap-1"
+                    style={{
+                      background:
+                        tipoEntrega === tipo
+                          ? "rgba(232,66,10,0.15)"
+                          : "#1E1C18",
+                      border:
+                        tipoEntrega === tipo
+                          ? "1px solid rgba(232,66,10,0.5)"
+                          : "1px solid #2C2A24",
+                      color: tipoEntrega === tipo ? "#F0ECD8" : "#6A6458",
+                    }}
+                  >
+                    <span className="text-lg">
+                      {tipo === "local" && "🍽️"}
+                      {tipo === "retiro" && "🏠"}
+                      {tipo === "delivery" && "🛵"}
+                    </span>
+                    <span className="uppercase tracking-tight">
+                      {tipo === "local" && "En Local"}
+                      {tipo === "retiro" && "Llevar"}
+                      {tipo === "delivery" && "Delivery"}
+                    </span>
+                  </button>
+                ),
+              )}
             </div>
           </div>
 
