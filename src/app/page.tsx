@@ -12,9 +12,6 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Producto | null>(null);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const modalAbierto = selectedProduct !== null || checkoutOpen;
-  {
-    /* Antes del return, agregá esta lógica: */
-  }
   // Reemplaza la función estaAbierto por esto junto a los otros useState:
   const [abierto, setAbierto] = useState<boolean>(false);
   useEffect(() => {
